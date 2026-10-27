@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: bookmyshow-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: bookmyshow
+    ports:
+      - "5432:5432"
+    volumes:
+      - bookmyshow_pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: bookmyshow-redis
+    ports:
+      - "6379:6379"
+    profiles:
+      - extras
+
+  elasticsearch:
+    image: elasticsearch:8.15.0
+    container_name: bookmyshow-es
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    profiles:
+      - extras
+
+volumes:
+  bookmyshow_pgdata:

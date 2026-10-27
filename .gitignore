@@ -2,3 +2,16 @@ node_modules/
 .env
 dist/
 build/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+logs/
+*.log
+.pytest_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+.idea/
+.vscode/
+.cursor/
